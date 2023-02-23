@@ -1,22 +1,31 @@
 import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 
 export default {
-  input: 'index.js',
+  input: 'src/index.ts',
   output: [
     {
       file: 'dist/index.js',
-      format: 'cjs'
+      format: 'cjs',
+      exports: 'named',
+      sourcemap: true,
     },
     {
-      file: 'dist/index.es.js',
-      format: 'es'
-    }
+      file: 'dist/index.esm.js',
+      format: 'esm',
+      exports: 'named',
+      sourcemap: true,
+    },
   ],
   plugins: [
     babel({
-      babelHelpers: 'bundled',
-      exclude: 'node_modules/**'
-    })
+      babelHelpers: 'runtime',
+      exclude: 'node_modules/**',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+      plugins: [['@babel/plugin-transform-runtime', { regenerator: true }]],
+    }),
+    typescript(),
   ],
-  external: ['react']
+  external: ['react', '@babel/runtime'],
 };
