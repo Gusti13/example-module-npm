@@ -1,6 +1,6 @@
 {
   "name": "example-module-npm",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "contoh module react hook untuk counter",
   "main": "index.js",
   "repository": "https://github.com/Gusti13/example-module-npm.git",

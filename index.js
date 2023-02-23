@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function useCounter(initialValue, step = 1) {
   const [count, setCount] = useState(initialValue);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCount((prevCount) => prevCount + step);
-    }, 1000);
+  const increment = () => setCount(prevCount => prevCount + step)
 
-    return () => clearInterval(intervalId);
-  }, [step]);
+  const decrement = () => setCount(prevCount => prevCount - step)
 
-  return count;
+  return { count, increment, decrement };
 }
